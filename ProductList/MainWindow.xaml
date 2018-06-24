@@ -6,13 +6,31 @@
         xmlns:local="clr-namespace:ProductList"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="500">
+    <Window.Resources>
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
         <ListView x:Name="lstProducts">
             <ListView.View>
             <GridView>
-                <GridViewColumn Header="Symbol" DisplayMemberBinding="{Binding Symbol}" />
+                    <GridViewColumn Header="Symbol">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Foreground="BlueViolet" Text="{Binding Symbol}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="Nazwa" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Liczba Sztuk:" DisplayMemberBinding="{Binding Count}" />
+                    <GridViewColumn Header="Liczba Sztuk:" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Foreground="Azure" Background="DeepSkyBlue" Text="{Binding Count}" TextAlignment="Center" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="Magazyn:" DisplayMemberBinding="{Binding Warehouse}" />
             </GridView>
             </ListView.View>
