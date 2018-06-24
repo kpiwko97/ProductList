@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProductList"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="350" Width="500">
     <Grid>
-        
+        <ListView>
+            <ListView.View>
+            <GridView>
+                <GridViewColumn Header="Symbol" DisplayMemberBinding="{Binding Symbol}" />
+                    <GridViewColumn Header="Nazwa" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Liczba Sztuk:" DisplayMemberBinding="{Binding Count}" />
+                    <GridViewColumn Header="Magazyn:" DisplayMemberBinding="{Binding Warehouse}" />
+            </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
