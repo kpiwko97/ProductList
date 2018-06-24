@@ -23,12 +23,13 @@ namespace ProductList
     public partial class MainWindow : Window
     {
         ObservableCollection<Products> productsCollection;
+        CollectionView view;
 
         public MainWindow()
         {
             InitializeComponent();
             PrepareBinding();
-            Sorting();
+         
         }
 
         internal void PrepareBinding()
@@ -42,12 +43,21 @@ namespace ProductList
             };
             lstProducts.ItemsSource = productsCollection;
 
-        }
-        private void Sorting()
-        {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lstProducts.ItemsSource);
             view.SortDescriptions.Add(new SortDescription("Symbol", ListSortDirection.Ascending));
+            view.Filter = Filtr;
+
         }
 
+        private bool Filtr(object item)
+        {
+            if (String.IsNullOrEmpty(txtFiltr.Text)) return true;
+            else return ((item as Products).Name.IndexOf(txtFiltr.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(lstProducts.ItemsSource).Refresh();
+        }
     }
 }

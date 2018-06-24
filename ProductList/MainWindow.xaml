@@ -11,9 +11,19 @@
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         </Style>
     </Window.Resources>
-    
     <Grid>
-        <ListView x:Name="lstProducts">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label Content="Filtruj wg nazwy produktu:" Grid.Column="0" Grid.Row="0" Margin="5" />
+        <TextBox  x:Name="txtFiltr" Grid.Column="1" Grid.Row="0" Margin="5" TextChanged="TextBox_TextChanged" />
+        <ListView x:Name="lstProducts" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
             <ListView.View>
             <GridView>
                     <GridViewColumn Header="Symbol">
