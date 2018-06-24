@@ -5,45 +5,73 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProductList"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="500">
+        Title="MainWindow" Height="250" Width="520">
     <Window.Resources>
         <Style TargetType="ListViewItem">
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         </Style>
     </Window.Resources>
-    <Grid>
+    <StackPanel Orientation="Horizontal">
+            <Grid DataContext="{Binding SelectedItem , ElementName=lstProducts}">
+                <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Content="Edytuj Produkt:" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" Margin="5" />
+            <Label Content="Symbol:" Grid.Column="0" Grid.Row="1" Margin="5" />
+            <Label Content="Nazwa: " Grid.Column="0" Grid.Row="2" Margin="5"/>
+            <Label Content="Liczba Sztuk:" Grid.Column="0" Grid.Row="3" Margin="5"/>
+            <Label Content="Magazyn:" Grid.Column="0" Grid.Row="4" Margin="5" />
+            <TextBox Text="{Binding Symbol}" Grid.Column="1" Grid.Row="1" Margin="5" MinWidth="150" />
+            <TextBox Text="{Binding Name}" Grid.Column="1" Grid.Row="2" Margin="5" MinWidth="150" />
+            <TextBox Text="{Binding Count}" Grid.Column="1" Grid.Row="3" Margin="5" MinWidth="150" />
+            <TextBox Text="{Binding Warehouse}" Grid.Column="1" Grid.Row="4" Margin="5" MinWidth="150" />
+        </Grid>
+        
+        <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Label Content="Filtruj wg nazwy produktu:" Grid.Column="0" Grid.Row="0" Margin="5" />
-        <TextBox  x:Name="txtFiltr" Grid.Column="1" Grid.Row="0" Margin="5" TextChanged="TextBox_TextChanged" />
-        <ListView x:Name="lstProducts" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
-            <ListView.View>
-            <GridView>
-                    <GridViewColumn Header="Symbol">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Foreground="BlueViolet" Text="{Binding Symbol}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Nazwa" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Liczba Sztuk:" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Foreground="Azure" Background="DeepSkyBlue" Text="{Binding Count}" TextAlignment="Center" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Magazyn:" DisplayMemberBinding="{Binding Warehouse}" />
-            </GridView>
-            </ListView.View>
-        </ListView>
-    </Grid>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label Content="Filtruj wg nazwy produktu:" Grid.Column="0" Grid.Row="0" Margin="5" />
+            <TextBox  x:Name="txtFiltr" Grid.Column="1" Grid.Row="0" Margin="5" TextChanged="TextBox_TextChanged" />
+            <ListView x:Name="lstProducts" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="5">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Symbol">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Foreground="BlueViolet" Text="{Binding Symbol}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Nazwa" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="Liczba Sztuk:" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Foreground="Azure" Background="DeepSkyBlue" Text="{Binding Count}" TextAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Magazyn:" DisplayMemberBinding="{Binding Warehouse}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="5,5" Padding="20,5" HorizontalAlignment="Left" Content="Dodaj" Click="Button_Click"  />
+            <Button Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="5,5" Padding="20,5" HorizontalAlignment="Right" Content="Usuń" Click="Button_Click_1"  />
+        </Grid>
+    </StackPanel>
 </Window>

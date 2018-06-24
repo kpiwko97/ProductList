@@ -59,5 +59,19 @@ namespace ProductList
         {
             CollectionViewSource.GetDefaultView(lstProducts.ItemsSource).Refresh();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            productsCollection.Add(new Products("null", "null", 0, "null"));
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Products products = lstProducts.SelectedItem as Products;
+            MessageBoxResult result = MessageBox.Show("Czy na pewno usunąć produkt: " + products.Name,"Warning", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+            if (result == MessageBoxResult.Yes)
+            productsCollection.Remove(products);
+        }
     }
 }
