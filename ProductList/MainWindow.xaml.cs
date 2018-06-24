@@ -27,10 +27,11 @@ namespace ProductList
         public MainWindow()
         {
             InitializeComponent();
-            PrzygotujWiazanie();
+            PrepareBinding();
+            Sorting();
         }
 
-        private void PrzygotujWiazanie()
+        internal void PrepareBinding()
         {
             productsCollection = new ObservableCollection<Products>()
             {
@@ -40,6 +41,13 @@ namespace ProductList
                 new Products("CC","wał",8,"Ełk"),
             };
             lstProducts.ItemsSource = productsCollection;
+
         }
+        private void Sorting()
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lstProducts.ItemsSource);
+            view.SortDescriptions.Add(new SortDescription("Symbol", ListSortDirection.Ascending));
+        }
+
     }
 }
